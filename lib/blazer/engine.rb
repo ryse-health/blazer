@@ -2,6 +2,10 @@ module Blazer
   class Engine < ::Rails::Engine
     isolate_namespace Blazer
 
+    # NOTE: Ryse modifications start
+    config.ryse_options = ActiveSupport::OrderedOptions.new
+    # NOTE: Ryse modifications end
+
     initializer "blazer" do |app|
       if app.config.respond_to?(:assets) && defined?(Sprockets)
         if Sprockets::VERSION.to_i >= 4

@@ -1,0 +1,22 @@
+<%# locals: (data_source:) %>
+
+<%# NOTE: This file is a Ryse modification %>
+<% data_source_staleness = Blazer::Engine.config.ryse_options.data_source_staleness_provider&.call(data_source.id) %>
+<% if data_source_staleness %>
+  <%
+    alert_class =
+      case data_source_staleness.alert_level
+      when :info
+        "alert-info"
+      when :warning
+        "alert-warning"
+      when :error
+        "alert-danger"
+      else
+        "alert-info"
+      end
+  %>
+  <div role="alert" class="alert <%= alert_class %>">
+    <%= data_source_staleness.message %>
+  </div>
+<% end %>
